@@ -22,7 +22,7 @@ public class Account {
 		this.balance = balance;
 		this.annualInterestRate = annualInterestRate;
 	}
-	
+
 	public int getId() {
 		return id;
 	}
@@ -56,13 +56,20 @@ public class Account {
 	}
 
 	public void withdraw(double amount) throws InsufficientFundsException {
-		if (balance - amount < 0)
-			throw new InsufficientFundsException(balance - amount);
+		if (amount > 0) {
+			if (balance - amount < 0)
+				throw new InsufficientFundsException(balance - amount);
+			else
+				balance -= amount;
+		}
 		else
-			balance -= amount;
+			System.out.println("You must withdraw a positive amount.");
 	}
 
 	public void deposit(double amount) {
-		balance += amount;
+		if (amount > 0) 
+			balance += amount;
+		else
+			System.out.println("You must deposit a positive amount.");
 	}
 }
